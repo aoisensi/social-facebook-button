@@ -1,0 +1,62 @@
+<link href="bower_components/polymer/polymer.html" rel="import">
+
+<polymer-element name="social-facebook-button" attributes="action colorscheme href kid_directed_site layout ref share show_faces width height">
+  <template>
+    <iframe src="{{src}}" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+    <style>
+      iframe {
+        width: "{{width}}px";
+        height: "{{height}}px";
+        border: none;
+        overflow: hidden;
+      }
+    </style>
+  </template>
+  <script>
+    var args = ['action', 'colorscheme', 'href', 'kid_directed_site', 'layout', 'ref', 'share', 'show_faces', 'width']
+    Polymer('social-facebook-button', {
+      action: null,
+      colorscheme: null,
+      href: null,
+      kid_directed_site: null,
+      layout: null,
+      ref: null,
+      share: null,
+      show_faces: null,
+      widthtext: null,
+
+      width: 140,
+      height: 28,
+
+      src: '',
+      ready: function() {
+        this.update()
+      },
+      attributeChanged: function(a, o, n) {
+        this.update()
+      },
+      update: function() {
+        var src = '//www.facebook.com/plugins/like.php?';
+        for (var i in args) {
+          var arg = args[i];
+          var attr = this.getAttribute(arg);
+          switch (arg) {
+            case 'href':
+              if (attr) {
+                src += arg + '=' + attr + '&';
+              } else {
+                src += arg + '=' + document.URL + '&';
+              };
+              break;
+            default:
+              if (attr) {
+                src += arg + '=' + attr + '&';
+              };
+              break;
+          };
+        };
+        this.src = src;
+      }
+    });
+  </script>
+</polymer-element>
