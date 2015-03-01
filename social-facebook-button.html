@@ -1,19 +1,16 @@
-<link href="bower_components/polymer/polymer.html" rel="import">
+<link href="../polymer/polymer.html" rel="import">
 
 <polymer-element name="social-facebook-button" attributes="action colorscheme href kid_directed_site layout ref share show_faces width height">
   <template>
-    <iframe src="{{src}}" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+    <iframe src="{{src}}" scrolling="no" frameborder="0" allowTransparency="true" width="{{width}}" height="{{height}}"></iframe>
     <style>
-      iframe {
-        width: {{width}}px;
-        height: {{height}}px;
-        border: none;
-        overflow: hidden;
-      }
+    iframe {
+      border: none;
+      overflow: hidden;
+    }
     </style>
   </template>
   <script>
-    var args = ['action', 'colorscheme', 'href', 'kid_directed_site', 'layout', 'ref', 'share', 'show_faces', 'width']
     Polymer('social-facebook-button', {
       action: null,
       colorscheme: null,
@@ -32,10 +29,8 @@
       ready: function() {
         this.update()
       },
-      attributeChanged: function(a, o, n) {
-        this.update()
-      },
       update: function() {
+        var args = ['action', 'colorscheme', 'href', 'kid_directed_site', 'layout', 'ref', 'share', 'show_faces', 'width']
         var src = '//www.facebook.com/plugins/like.php?';
         for (var i in args) {
           var arg = args[i];
